@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User - Details</title>
+    <style>
+        .user-details {
+            margin: 20px auto;
+            width: 90%;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            width: 90%;
+        }
+        .posts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        .post {
+            width: 18%;
+            margin: 10px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border: 1px solid #bbb;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #btnPosts {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4aac4a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #btnPosts:hover {
+            background-color: #2c9e2c;
+        }
+    </style>
+</head>
+<body>
+<h1>User Details</h1>
+<div class="user-details" id="userDetails"></div>
+<button id="btnPosts">Post of current user</button>
+<div class="posts" id="postContainer"></div>
+
+
+<script>
+    let params = new URLSearchParams(window.location.search);
+    let userId = params.get('id');
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+        .then(response => response.json())
+        .then(user => {
+            let userDetails = document.getElementById('userDetails');
+
+            userDetails.innerHTML = `
+                    <p>ID: ${user.id}</p>
+                    <p>Name: ${user.name}</p>
+                    <p>Email: ${user.email}</p>
+                    <p>Phone: ${user.phone}</p>
+                    <p>Website: ${user.website}</p>
+                    <p>Company: ${user.company.name}</p>
+                    <p>Address: ${user.address.street}, ${user.address.city}</p>
+                `;
+        })
+
+    let btnPost = document.getElementById('btnPosts');
+    btnPost.addEventListener('click',() => {
+        fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+            .then(response => response.json())
+            .then(posts => {
+                let postContainer = document.getElementById('postContainer');
+                postContainer.innerHTML = '';
+                for (let i = 0; i < posts.length; i++) {
+                    let post = posts[i];
+                    let  postBlock = document.createElement('div');
+                    postBlock.classList.add('post')
+                    postBlock.innerHTML =`<h4>${post.title}</h4>
+                                         <a href = 'post-details.html?postId=${post.id}'>
+                                           <button>Дивитися пост</button>
+                                           </a>`;
+                    postContainer.appendChild(postBlock);
+                }
+            })
+    })
+
+</script>
+</body>
+</html>

@@ -12,7 +12,6 @@
 <!--на сторінку user-details.html, котра має детальну інфорацію про об'єкт на який клікнули-->
 
 <body>
-
   <h1>Users</h1>
    <div class="user-container" id="users"></div>
 
@@ -23,7 +22,6 @@
         let userContainer = document.getElementById('users');
         for (let i = 0; i < users.length; i++) {
             let user = users[i];
-
             let userBlock = document.createElement('div');
             userBlock.classList.add('user-block');
             userBlock.innerHTML = `<p>id: ${user.id}</p>
@@ -31,7 +29,6 @@
                                    <a href="user-details.html?id=${user.id}">
                                    <button>Дивитись деталі</button>
                                    </a>`;
-
             userContainer.appendChild(userBlock);
         }
     })

@@ -3,42 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        .post-details {
-            margin: 20px;
-            padding: 20px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-        }
-        .post-details pre{
-            white-space: pre-wrap;
-        }
-
-        .comments {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 15px;
-
-        }
-        .comment {
-            width: 25%;
-            margin: 10px;
-            padding: 10px;
-            font-size: 15px;
-            background-color: #d1cbcb;
-            border: 1px solid #bbb;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .comment pre {
-            white-space: pre-wrap;
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="post-details" id="postDetails"></div>
 <div class="comments" id="commentsContainer"></div>
 
